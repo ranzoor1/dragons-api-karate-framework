@@ -1,52 +1,52 @@
-#End 2 End Account Testing.
-#Create Account
+#End 2 End Account Testsing.
+# Create Account
 # Add Address
 # Add Phone
 # Add Car
 # Get Account
-# Note: Everything in 1 Scenario.
-Feature: End-to-End Account Testing.
+#Note: Everything in 1 scenario.
+@Regression
+Feature: End-to-End Account Testsing.
 
-  Background: Setup Test Generate Token
-    * def tokenFeature = callonce read('GenerateToken.feature')
-    #And print result
-    * def token = tokenFeature.response.token
+  Background: API Test Setup
+    * def result = callonce read('GenerateToken.feature')
+    And print result
+    * def generatedToken = result.response.token
     Given url "https://tek-insurance-api.azurewebsites.net"
 
   Scenario: End-to-End Account Creation Testing
     * def dataGenerator = Java.type('api.data.GenereteData')
-    * def autoEmail = dataGenerator.getEmail()
+    * def emailAddressData = dataGenerator.getEmail()
     Given path "/api/accounts/add-primary-account"
-    And header Authorization = "Bearer " + token
+    And header Authorization = "Bearer " + generatedToken
     And request
       """
       {
-      "email": "#(autoEmail)",
-      "firstName": "Ali Ahamd",
+      "email": "#(emailAddressData)",
+      "firstName": "AliAhmad",
       "lastName": "Ranzoor",
       "title": "Mr.",
       "gender": "MALE",
       "maritalStatus": "SINGLE",
-      "employmentStatus": "Software Tester",
-      "dateOfBirth": "1988-02-27"
+      "employmentStatus": "Software Developer",
+      "dateOfBirth": "1988-02-28"
       }
       """
     When method post
     Then status 201
     And print response
-    And assert response.email == autoEmail
-    * def id = response.id
-    #Add Address
+    And assert response.email == emailAddressData
+    And assert response.firstName == "AliAhmad"
+    * def generatedAccountId = response.id
     Given path "/api/accounts/add-account-address"
-    And header Authorization = "Bearer " + token
-    And param primaryPersonId = id
+    And param primaryPersonId = generatedAccountId
+    And header Authorization = "Bearer " + generatedToken
     And request
       """
       {
-      "id":,
-      "addressType": "25673 Narbonne Ave",
-      "addressLine1": "unit# 56",
-      "city": "Lomita",
+      "addressType": "Home",
+      "addressLine1": "25625 Nar Ave",
+      "city": "lomita",
       "state": "CA",
       "postalCode": "90717",
       "countryCode": "",
@@ -56,47 +56,45 @@ Feature: End-to-End Account Testing.
     When method post
     Then status 201
     And print response
-    And assert response.addressLine1 == "unit# 56"
-    #Add Account phone
+    And assert response.addressLine1 == "25625 Nar Ave"
     Given path "/api/accounts/add-account-phone"
-    And header Authorization = "Bearer " + token
-    And param primaryPersonId = id
+    And param primaryPersonId = generatedAccountId
+    And header Authorization = "Bearer " + generatedToken
+    * def randomPhoneNumber = dataGenerator.getPhoneNumber()
     And request
       """
       {
-      "id": 0,
-      "phoneNumber": "424-437-7854",
+      "phoneNumber": "#(randomPhoneNumber)",
       "phoneExtension": "",
       "phoneTime": "Morning",
-      "phoneType": "Home"
+      "phoneType": "Mobile"
       }
       """
     When method post
     Then status 201
     And print response
-    And assert response.phoneNumber == "424-437-7854"
-    #Add Account Car
+    And assert response.phoneNumber == randomPhoneNumber
     Given path "/api/accounts/add-account-car"
-    And header Authorization = "Bearer " + token
-    And param primaryPersonId = id
+    And param primaryPersonId = generatedAccountId
+    And header Authorization = "Bearer " + generatedToken
+    * def randomLicensePlate = dataGenerator.getLicensePlate()
     And request
       """
       {
-      "id": 0,
-      "make": "TOYOTA",
-      "model": "Camry",
-      "year": "2023",
-      "licensePlate": "9ESL2023"
+      "make": "Ford",
+      "model": "Mustang",
+      "year": "2018",
+      "licensePlate": "#(randomLicensePlate)"
       }
       """
     When method post
-    Then status 201
+    And status 201
     And print response
-    And assert response.licensePlate == "9ESL2023"
-    # Get Account 
+    And assert response.licensePlate == randomLicensePlate
     Given path "/api/accounts/get-account"
-    And header Authorization = "Bearer " + token
-    And param primaryPersonId = id
+    And param primaryPersonId = generatedAccountId
+    And header Authorization = "Bearer " + generatedToken
     When method get
     Then status 200
     And print response
+    And assert response.primaryPerson.id == generatedAccountId

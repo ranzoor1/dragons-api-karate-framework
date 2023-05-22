@@ -1,6 +1,7 @@
 #Scenario 5:
 #endpoint = /api/token/verify
 #With a valid token you should get response HTTP Status Code 200 and response true
+@Smoke @Regression
 Feature: Token Verify Test
 
   Background: Setup Test URL

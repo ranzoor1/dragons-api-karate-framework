@@ -8,6 +8,7 @@
 #Once you create Account validate database and take screenshot.
 #FirstName and LastName should be your name.
 #In Request body we don't need id and isNew field (you can remove them).
+@Regression
 Feature: Create Account Test
 
   Background: API Test Setup

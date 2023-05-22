@@ -1,3 +1,4 @@
+@Smoke @Regression
 Feature: API Test Security Section
 
   Background: Setup Request URL

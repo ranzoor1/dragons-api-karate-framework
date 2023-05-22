@@ -1,3 +1,4 @@
+@Regression
 Feature: Get Account API
 
   #Scenario 9:
