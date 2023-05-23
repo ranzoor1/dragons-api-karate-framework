@@ -30,7 +30,7 @@
 				<version>2.22.2</version>
 				<configuration>
   <includes>
-  <include>SmokeRunner.java</include>
+  <include>TestRunner.java</include>
   </includes>
    </configuration>
 			</plugin>
