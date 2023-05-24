@@ -9,7 +9,7 @@ public class SmokeRunner {
 		//run() method required path to feature files. 
 		//you can use tags() method to specify the Tags. 
 		return Karate.run("classpath:features")
-				.tags("Regression");
+				.tags("Smoke");
 		
 	}
 
