@@ -2,10 +2,9 @@
 Feature: Random Account Creation
 
   Background: Setup Test Generate Token
-    * def tokenFeature = callonce read('GenerateToken.feature')
-    * def token = tokenFeature.response.token
-    Given url "https://tek-insurance-api.azurewebsites.net"
-
+  * def tokenFeature = callonce read('GenerateToken.feature')
+  * def token = tokenFeature.response.token
+  Given url "https://tek-insurance-api.azurewebsites.net"
   Scenario: Create Account with Random Email
     # Call Java Class and Method with Karate.
     * def dataGenerator = Java.type('api.data.GenereteData')
@@ -16,7 +15,7 @@ Feature: Random Account Creation
       """
       {
       "email": "#(autoEmail)",
-      "firstName": "Ali Ahmad",
+      "firstName": "ALiAHmad",
       "lastName": "Ranzoor",
       "title": "Mr.",
       "gender": "MALE",
