@@ -6,7 +6,7 @@ Feature: All Accounts
     * def token = tokenFeature.response.token
     Given url "https://tek-insurance-api.azurewebsites.net"
     
-    Scenario: Get all accounts api
+    Scenario: Get all accounts 
     
     * def dataGenerator = Java.type('api.data.GenereteData')
     * def autoEmail = dataGenerator.getEmail()
