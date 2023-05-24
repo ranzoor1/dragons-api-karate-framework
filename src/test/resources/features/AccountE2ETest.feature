@@ -23,20 +23,20 @@ Feature: End-to-End Account Testsing.
       """
       {
       "email": "#(emailAddressData)",
-      "firstName": "AliAhmad",
+      "firstName": "Ali AHmad",
       "lastName": "Ranzoor",
       "title": "Mr.",
       "gender": "MALE",
       "maritalStatus": "SINGLE",
       "employmentStatus": "Software Developer",
-      "dateOfBirth": "1988-02-28"
+      "dateOfBirth": "1988-02-27"
       }
       """
     When method post
     Then status 201
     And print response
     And assert response.email == emailAddressData
-    And assert response.firstName == "AliAhmad"
+    And assert response.firstName == "Ali AHmad"
     * def generatedAccountId = response.id
     Given path "/api/accounts/add-account-address"
     And param primaryPersonId = generatedAccountId
@@ -45,10 +45,10 @@ Feature: End-to-End Account Testsing.
       """
       {
       "addressType": "Home",
-      "addressLine1": "25625 Nar Ave",
-      "city": "lomita",
-      "state": "CA",
-      "postalCode": "90717",
+      "addressLine1": "1234 Some Street",
+      "city": "Falls Church",
+      "state": "California",
+      "postalCode": "22135",
       "countryCode": "",
       "current": true
       }
@@ -56,7 +56,7 @@ Feature: End-to-End Account Testsing.
     When method post
     Then status 201
     And print response
-    And assert response.addressLine1 == "25625 Nar Ave"
+    And assert response.addressLine1 == "1234 Some Street"
     Given path "/api/accounts/add-account-phone"
     And param primaryPersonId = generatedAccountId
     And header Authorization = "Bearer " + generatedToken

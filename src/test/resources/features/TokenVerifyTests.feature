@@ -40,15 +40,25 @@ Feature: Token Verify Test
     And print response
     And assert response.errorMessage == "Wrong Username send along with Token"
 
-  #Scnetario 7:
+  #Scenario 7:
   #Endpoint = /api/token/verify
-  #with invalid taken and valid username should have
-  #status code 400 and error massage "Token Expired or Invalid Toaken"
-  Scenario: Nagative test vefiry Token wiht invalied token and valid username
-    Given path "/api/token/verify"
-    And param token = "invalid_token"
-    And param username = "supervisor"
-    When method get
-    Then status 400
-    And print response
-    And assert response.errorMessage == "Token Expired or Invalid Token"
+  #with invalid token and valid username should have
+  #Status code 400 and error Message "Token Expired or Invalid Token"
+  Scenario: Negative test varify Token with invalid token and valid username
+		Given path "/api/token/verify"
+		And param token = "invalid_token"
+		And param username = "supervisor"
+		And method get
+		Then status 400
+		And print response
+		And assert response.errorMessage == "Token Expired or Invalid Token"
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
