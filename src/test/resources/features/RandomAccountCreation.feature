@@ -16,8 +16,8 @@ Feature: Random Account Creation
       """
       {
       "email": "#(autoEmail)",
-      "firstName": "Mohammad",
-      "lastName": "Shokriyan",
+      "firstName": "Ali Ahmad",
+      "lastName": "Ranzoor",
       "title": "Mr.",
       "gender": "MALE",
       "maritalStatus": "SINGLE",
