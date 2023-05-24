@@ -1,4 +1,3 @@
-@Regression
 Feature: All Accounts
 
    Background: Setup Test Generate Token
