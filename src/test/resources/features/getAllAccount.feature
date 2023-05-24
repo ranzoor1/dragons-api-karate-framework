@@ -1,7 +1,7 @@
 @Regression
 Feature: All Accounts
 
-  Background: Setup Test Generate Token
+   Background: Setup Test Generate Token
     * def tokenFeature = callonce read('GenerateToken.feature')
     * def token = tokenFeature.response.token
     Given url "https://tek-insurance-api.azurewebsites.net"
